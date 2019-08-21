@@ -1,6 +1,6 @@
 # channelswap
 
-This is a small project that i used to explore the viability of having multiple services that share a target channel writer, and ability to HOT-SWAP change the channel assignments at runtime. This would allow a ServiceRegistry to alter the target of the other end of the channel w/o the service even being aware it changed.
+This is a small project that i used to explore the viability of having multiple services that share a target channel writer, and ability to **HOT-SWAP** change the channel assignments at runtime. This would allow a ServiceRegistry to alter the target of the other end of the channel w/o the service even being aware it changed.
 
 The need we had in my organization was to take multiple assigned channels, and have one take a mutually exclusive log on the shared channel, to get full priority of messages. 
 
@@ -12,10 +12,14 @@ The main.go started (2) services (there is no limit based on the ServiceRegistry
 
 The only trick is to be sure your receivers that need to change addresses on the channels are setup as pointers in the receiver. This was my only gotcha of it not working correctly the first time.
 
-## Warning: 
+## warning: 
 This works great for channel writers. If you need to hot swap a channel reader, odds are it might be in a select block. If so, be sure to interrrupt the blocking channel in select so it can start it's read again on the newly acquired channel address.
 
-# Build instructions:
+# requirements
+golang 1.12+ (to make use of go mod build below)
+Would work with previous go versions if you set your GOPATH accordingly
+
+# build instructions:
 to run the demo, simple use golang build in  `go get` as such. 
 ```
 go get github.com/dfense/channelswap/main
