@@ -1,6 +1,8 @@
 # channelswap
 
-This is a small project that i used to explore the viability of having multiple services that share a target channel writer. The need we had in my organization was to take multiple assigned channels, and have one take a mutually exclusive log on the shared channel, to get full priority of messages. 
+This is a small project that i used to explore the viability of having multiple services that share a target channel writer, and ability to HOT-SWAP change the channel assignments at runtime. This would allow a ServiceRegistry to alter the target of the other end of the channel w/o the service even being aware it changed.
+
+The need we had in my organization was to take multiple assigned channels, and have one take a mutually exclusive log on the shared channel, to get full priority of messages. 
 
 The service was an OTA firmware updater, and needed to insure no other packets were written into the wireless mesh simultaneously. 
 
